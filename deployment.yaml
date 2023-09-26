@@ -5,7 +5,7 @@ metadata:
   labels:
     app: nodejs
 spec:
-  replicas: 1
+  replicas: 2
   selector:
     matchLabels:
       app: nodejs
@@ -19,4 +19,4 @@ spec:
           image: 872783840262.dkr.ecr.eu-west-2.amazonaws.com/devopshint:1.1
           imagePullPolicy: Always
           ports:
-            - containerPort: 80
+            - containerPort: 30100
