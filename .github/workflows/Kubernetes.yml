@@ -45,11 +45,6 @@ jobs:
       run: |
         docker build -t $REGISTRY/$REPOSITORY:$IMAGE_TAG .
         docker push $REGISTRY/$REPOSITORY:$IMAGE_TAG
-
-jobs:
-  build:
-    name: Deploy to EC2 on master branch push
-    runs-on: ubuntu-latest
         
     steps:
     - name: Deploy Kubernetes configuration to EC2
