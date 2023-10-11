@@ -5,6 +5,11 @@ on:
   pull_request:
     branches: [ "main" ]
 
+env:
+  REGISTRY: ${{ steps.login-ecr.outputs.registry }}
+  REPOSITORY: devopshint
+  IMAGE_TAG: 1.1    
+
 jobs:
   build:
     name: Deploy to EC2 on master branch push
@@ -40,7 +45,13 @@ jobs:
       run: |
         docker build -t $REGISTRY/$REPOSITORY:$IMAGE_TAG .
         docker push $REGISTRY/$REPOSITORY:$IMAGE_TAG
-    
+
+jobs:
+  build:
+    name: Deploy to EC2 on master branch push
+    runs-on: ubuntu-latest
+        
+    steps:
     - name: Deploy Kubernetes configuration to EC2
       uses: easingthemes/ssh-deploy@main
       env:
@@ -52,7 +63,7 @@ jobs:
         REMOTE_HOST: ${ { secrets.HOST_DNS }}
         REMOTE_USER: ${ { secrets.USERNAME }}
         TARGET: ${ { secrets.TARGET_DIR }}
-      run: |
+      script: |
         sudo apt update
         sudo apt install awscli -y
         sudo $(aws ecr get-login --no-include-email --region eu-west-2);
