@@ -12,7 +12,7 @@ env:
 
 jobs:
   build:
-    name: Deploy to EC2 on master branch push
+    name: Deploy to ECR Repository
     runs-on: ubuntu-latest
 
     steps:
@@ -63,7 +63,7 @@ jobs:
         REMOTE_HOST: ${ { secrets.HOST_DNS }}
         REMOTE_USER: ${ { secrets.USERNAME }}
         TARGET: ${ { secrets.TARGET_DIR }}
-      script: |
+      run: |
         sudo apt update
         sudo apt install awscli -y
         sudo $(aws ecr get-login --no-include-email --region eu-west-2);
