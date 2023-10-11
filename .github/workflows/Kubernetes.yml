@@ -49,11 +49,18 @@ jobs:
     - name: Checkout code
       uses: easingthemes/ssh-deploy@main
 
-    - name: Add Deployment to EC2
-      env:
+    - name: Connect to EC2
+      with:
         SSH_PRIVATE_KEY: ${ { secrets.SSH_PRIVATE_KEY }}
         REMOTE_HOST: ${ { secrets.REMOTE_HOST }}
         REMOTE_USER: ${ { secrets.REMOTE_USER }}
+    
+    - name: Add Deployment to EC2
+      env:
+        REGISTRY: ${{ steps.login-ecr.outputs.registry }}
+        REPOSITORY: devopshint
+        IMAGE_TAG: 1.1
+        AWS_DEFAULT_REGION: eu-west-2
       run: |
         sudo apt update
         sudo apt install awscli -y
