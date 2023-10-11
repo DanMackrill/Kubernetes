@@ -55,9 +55,9 @@ jobs:
         REPOSITORY: devopshint
         IMAGE_TAG: 1.1
         AWS_DEFAULT_REGION: eu-west-2 
-        SSH_PRIVATE_KEY: ${ { secrets.EC2_SSH_KEY }}
-        REMOTE_HOST: ${ { secrets.HOST_DNS }}
-        REMOTE_USER: ${ { secrets.USERNAME }}
+        sshPrivateKey: ${ { secrets.EC2_SSH_KEY }}
+        remoteHost: ${ { secrets.HOST_DNS }}
+        remoteUser: ${ { secrets.USERNAME }}
         TARGET: ${ { secrets.TARGET_DIR }}
       run: |
         sudo apt update
