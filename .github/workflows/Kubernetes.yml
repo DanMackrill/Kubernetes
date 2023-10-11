@@ -46,7 +46,7 @@ jobs:
         docker build -t $REGISTRY/$REPOSITORY:$IMAGE_TAG .
         docker push $REGISTRY/$REPOSITORY:$IMAGE_TAG
   
-  ECR Repo Build:
+  Deploy To EC2:
     name: Deploy Kubernetes configuration to EC2
     runs-on: ubuntu-latest
 
