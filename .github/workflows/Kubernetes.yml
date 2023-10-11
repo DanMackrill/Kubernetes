@@ -6,8 +6,8 @@ on:
     branches: [ "main" ]
 
   jobs:
-    deploy: Deploy to EC2 on master branch push
-      name: 
+    deploy:
+      name: Deploy to EC2 on master branch push
       runs-on: ubuntu-latest
 
       steps:
