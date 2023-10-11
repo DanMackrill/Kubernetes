@@ -63,7 +63,7 @@ jobs:
         REMOTE_HOST: ${ { secrets.HOST_DNS }}
         REMOTE_USER: ${ { secrets.USERNAME }}
         TARGET: ${ { secrets.TARGET_DIR }}
-      run: |
+      script: |
         sudo apt update
         sudo apt install awscli -y
         sudo $(aws ecr get-login --no-include-email --region eu-west-2);
