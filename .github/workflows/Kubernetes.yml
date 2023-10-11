@@ -6,7 +6,7 @@ on:
     branches: [ "main" ]   
 
 jobs:
-  ECR Repo Build:
+  ECR-Repo-Build:
     name: Deploy to ECR Repository
     runs-on: ubuntu-latest
 
@@ -41,7 +41,7 @@ jobs:
         docker build -t $REGISTRY/$REPOSITORY:$IMAGE_TAG .
         docker push $REGISTRY/$REPOSITORY:$IMAGE_TAG
   
-  Deploy To EC2:
+  Deploy-To-EC2:
     name: Deploy Kubernetes configuration to EC2
     runs-on: ubuntu-latest
 
