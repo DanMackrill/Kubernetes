@@ -51,6 +51,9 @@ jobs:
         SSH_PRIVATE_KEY: ${ { secrets.SSH_PRIVATE_KEY }}
         REMOTE_HOST: ${ { secrets.REMOTE_HOST }}
         REMOTE_USER: ${ { secrets.REMOTE_USER }}
+      run: |
+        echo "$SSH_PRIVATE_KEY" > private_key && chmod 600 private_key
+        ssh -o StrictHostKeyChecking=no -i private_key ${REMOTE_USER}@${REMOTE_USER}
     
     - name: Add Deployment to EC2
       env:
@@ -59,8 +62,6 @@ jobs:
         IMAGE_TAG: 1.1
         AWS_DEFAULT_REGION: eu-west-2
       run: |
-        echo "$SSH_PRIVATE_KEY" > private_key && chmod 600 private_key
-        ssh -o StrictHostKeyChecking=no -i private_key ${REMOTE_USER}@${REMOTE_USER} '
         sudo apt update
         sudo apt install awscli -y
         sudo $(aws ecr get-login --no-include-email --region eu-west-2);
