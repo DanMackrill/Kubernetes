@@ -48,9 +48,9 @@ jobs:
     steps:  
     - name: Connect to Server
       env:
-        SSH_PRIVATE_KEY: ${ { secrets.SSH_PRIVATE_KEY }}
-        REMOTE_HOST: ${ { secrets.REMOTE_HOST }}
-        REMOTE_USER: ${ { secrets.REMOTE_USER }}
+        PRIVATE_KEY: ${{ secrets.SSH_PRIVATE_KEY }}
+        HOSTNAME: ${{secrets.SSH_HOST}}
+        USER_NAME: ${{secrets.USER_NAME}}
       run: |
         echo "$SSH_PRIVATE_KEY" > private_key && chmod 600 private_key
         ssh -o StrictHostKeyChecking=no -i private_key ${REMOTE_USER}@${REMOTE_USER}
